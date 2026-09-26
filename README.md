@@ -23,12 +23,15 @@ Run the app and watch the outlines:
 | Type in **Data value**       | Only the form and the view that show the data.            |
 | Toggle the theme (top right) | Every outlined component, because they all use the theme. |
 
+`tests/app/renderIsolation.test.tsx` checks each row of this table by counting how often each component flashes.
+
 ## Technologies Used
 
 - [React 19](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vite](https://vite.dev/)
 - [Immer](https://immerjs.github.io/immer/)
+- [Vitest](https://vitest.dev/) and [Testing Library](https://testing-library.com/)
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 
@@ -59,6 +62,8 @@ You need Node.js 20.19 or later on the 20.x line, 22.13 or later on the 22.x lin
 
 - `npm run dev`: Starts the development server.
 - `npm run build`: Type-checks the project, then builds it for production.
+- `npm test`: Runs the tests once with Vitest. `npm run test:watch` reruns them on change.
+- `npm run test:coverage`: Runs the tests with coverage and fails below 100%.
 - `npm run lint`: Lints the code using ESLint. Any warning fails the run. Add `-- --fix` to apply autofixes, such as import sorting.
 - `npm run preview`: Serves the production build locally.
 - `npm run format`: Formats the code using Prettier.
@@ -66,7 +71,7 @@ You need Node.js 20.19 or later on the 20.x line, 22.13 or later on the 22.x lin
 
 ## Continuous Integration
 
-- **Pull requests** run ESLint (`.github/workflows/lint.yml`).
+- **Pull requests** run ESLint and the tests with coverage (`.github/workflows/lint.yml`).
 - **Every push to `main`**, including merged pull requests, builds the app and deploys it to GitHub Pages (`.github/workflows/deploy.yml`).
 
 ## Architecture

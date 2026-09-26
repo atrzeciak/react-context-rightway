@@ -5,15 +5,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 - `npm run dev` starts the Vite dev server.
-- `npm run build` type-checks with `tsc -b`, then builds with Vite. The type check also covers `vite.config.ts`, `eslint.config.ts` and `eslintRules/`.
+- `npm run build` type-checks with `tsc -b`, then builds with Vite. The type check also covers `vite.config.ts`, `eslint.config.ts`, `eslintRules/` and `tests/`.
 - `npm run lint` runs ESLint and fails on any warning. `npm run lint -- --fix` sorts imports and applies other autofixes.
 - `npm run format` and `npm run format:check` run Prettier over the whole repo.
+- `npm test` runs Vitest once. `npm run test:watch` watches, and `npx vitest run tests/app/Page.test.tsx -t "toggles"` runs one test.
+- `npm run test:coverage` fails below 100% coverage of `src/` and `eslintRules/`.
 
-There is no test suite.
+## Tests
+
+- Tests live in `tests/`, mirroring `src/`, not next to the code: the file-name rule would require `DataForm.test.tsx` to export `DataForm.test`.
+- Vitest runs two projects from `vite.config.ts`: `app` in jsdom with `tests/setup.ts`, and `eslintRules` in Node for the local rule's `RuleTester` cases.
+- jsdom has no `Element.animate`, so `tests/flashes.ts` mocks it. Every call is one `useRenderFlash` flash, and `flashedElements()` lists the elements that rendered since `clearFlashes()`. Render counts are asserted this way.
+- `tests/app/renderIsolation.test.tsx` checks the three render guarantees below. It must keep passing.
 
 ## Purpose
 
-This is a demo of using React Context as a store without unnecessary re-renders. Every design choice serves that, so check the render behaviour after any change to components or the store:
+This is a demo of using React Context as a store without unnecessary re-renders. Every design choice serves that, so check the render behaviour after any change to components or the store. `tests/app/renderIsolation.test.tsx` covers it:
 
 - A click on "Click me" re-renders only `Counter`.
 - Typing re-renders only `DataForm` and `DataView`.
@@ -38,6 +45,8 @@ The ESLint config (`eslint.config.ts`, loaded through `jiti`) is intentionally a
 - **Identifiers:** `Props` and `ref` are the only abbreviations allowed.
 
 ## Toolchain notes
+
+- Test files get @vitest/eslint-plugin's recommended preset plus stricter rules, eslint-plugin-testing-library's React preset and every eslint-plugin-jest-dom rule. Only `*.test.*` files get them; `tests/setup.ts` and `tests/flashes.ts` are plain modules.
 
 - TypeScript is pinned to `~6.0` because typescript-eslint does not support TypeScript 7 yet.
 - Vite resolves the `@/` alias from the tsconfig paths through `resolve.tsconfigPaths`. There is no separate alias config.
