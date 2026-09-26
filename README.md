@@ -2,6 +2,8 @@
 
 This project demonstrates how to use React's Context API as an application store without unnecessary re-renders. It's a small application built with React, TypeScript, and Vite. Every component outlines itself when it renders, so you can see exactly what each action re-renders.
 
+**Live demo:** <https://atrzeciak.github.io/react-context-rightway/>
+
 ## Key Features
 
 - **Context as a store, published in slices**: One provider holds the whole state, but the data, the theme, and the actions each go through their own context. Custom hooks (`useStoreData`, `useStoreTheme` and `useStoreActions`) read them and throw if used outside the provider. Each component re-renders only when the slice it reads changes.
@@ -61,6 +63,11 @@ You need Node.js 20.19 or later on the 20.x line, 22.13 or later on the 22.x lin
 - `npm run preview`: Serves the production build locally.
 - `npm run format`: Formats the code using Prettier.
 - `npm run format:check`: Checks formatting without writing.
+
+## Continuous Integration
+
+- **Pull requests** run ESLint (`.github/workflows/lint.yml`).
+- **Every push to `main`**, including merged pull requests, builds the app and deploys it to GitHub Pages (`.github/workflows/deploy.yml`).
 
 ## Architecture
 
