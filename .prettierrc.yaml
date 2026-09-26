@@ -1,0 +1,7 @@
+printWidth: 132
+singleQuote: false
+jsxSingleQuote: false
+tabWidth: 2
+useTabs: false
+semi: true
+endOfLine: lf

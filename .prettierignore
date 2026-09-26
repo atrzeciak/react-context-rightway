@@ -1,0 +1,2 @@
+# Claude Code writes its settings in its own style; everything else is covered by .gitignore.
+.claude/

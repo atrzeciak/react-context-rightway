@@ -1,0 +1,86 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme="light"] {
+  --bar-background: #e5e7eb;
+  --border-color: #d1d5db;
+  color-scheme: light;
+  color: black;
+  background-color: white;
+}
+
+:root[data-theme="dark"] {
+  --bar-background: #1f2937;
+  --border-color: #4b5563;
+  color-scheme: dark;
+  color: white;
+  background-color: black;
+}
+
+body {
+  margin: 0;
+}
+
+/* Three columns: left, centered, right. */
+header,
+footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bar-background);
+}
+
+header p,
+footer p {
+  margin: 0;
+}
+
+header > :first-child,
+footer > :first-child {
+  justify-self: start;
+}
+
+header > :first-child {
+  font-weight: bold;
+}
+
+header > :last-child {
+  justify-self: end;
+}
+
+header {
+  border-bottom: 2px solid;
+  border-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet) 1;
+}
+
+footer {
+  padding-block: 0.25rem;
+}
+
+/* Fill the window so the footer sits at the bottom when content is short. */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+/* The data page sits in the middle of the main area. */
+main {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.data-page {
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
